@@ -1,50 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Diagnostics;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Microsoft.Windows.AppNotifications;
+using Microsoft.Windows.AppNotifications.Builder;
+using UnhandledExceptionEventArgs = Microsoft.UI.Xaml.UnhandledExceptionEventArgs;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace CyreneAuth;
 
-namespace CyreneAuth
+public partial class App : Application
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
-    public partial class App : Application
+    private static readonly MainWindow MainWindow = new();
+    public App()
     {
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        public App()
-        {
-            this.InitializeComponent();
-        }
+        InitializeComponent();
+        UnhandledException += HandleExceptions;
+    }
 
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
-        {
-            m_window = new MainWindow();
-            m_window.Activate();
-        }
+    protected override void OnLaunched(LaunchActivatedEventArgs args)
+    {
 
-        private Window? m_window;
+        #if DEBUG
+
+        if (Debugger.IsAttached)
+            DebugSettings.BindingFailed += DebugSettings_BindingFailed;
+
+        #endif
+
+        MainWindow.ExtendsContentIntoTitleBar = true;
+        MainWindow.Activate();
+    }
+
+    private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
+    {
+        throw new Exception($"A debug binding failed: " + e.Message);
+    }
+
+    private void HandleExceptions(object sender, UnhandledExceptionEventArgs e)
+    {
+        e.Handled = true; // Don't crash the app.
+
+        // Create the notification.
+        var notification = new AppNotificationBuilder()
+            .AddText("An exception was thrown.")
+            .AddText($"Type: {e.Exception.GetType()}")
+            .AddText($"Message: {e.Message}\r\n" +
+                     $"HResult: {e.Exception.HResult}")
+            .BuildNotification();
+
+        // Show the notification
+        AppNotificationManager.Default.Show(notification);
     }
 }

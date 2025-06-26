@@ -1,0 +1,13 @@
+<Page
+    x:Class="CyreneAuth.Views.AccountPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CyreneAuth.Views">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="账号管理" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <TextBlock Text="在这里管理您的账号信息" FontSize="16" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>
