@@ -14,8 +14,15 @@ public sealed partial class MainWindow : Window
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
 
-        AppWindow.SetIcon("Assets/Icon.ico");
+        AppWindow.Resize(new Windows.Graphics.SizeInt32(1400, 800));
+        AppWindow.SetIcon("Assets/Icon.png");
         AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
+
+        if (AppWindow.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.IsMaximizable = false;
+            presenter.IsResizable = false;
+        }
 
         ContentFrame.Navigate(typeof(NavigationPage));
     }

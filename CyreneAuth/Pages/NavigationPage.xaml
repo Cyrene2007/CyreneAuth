@@ -8,14 +8,31 @@
         <NavigationView
             x:Name="MainNavigationView"
             AlwaysShowHeader="True"
-            IsSettingsVisible="False"
+            IsPaneOpen="False"
+            IsPaneToggleButtonVisible="False"
             IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            CompactPaneLength="48"
             SelectionChanged="MainNavigationView_SelectionChanged">
+
             <Frame x:Name="ContentFrame"/>
+
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="Home" Content="主页" Tag="HomePage" />
-                <NavigationViewItem Icon="Account" Content="账号" Tag="AccountPage" />
-                <NavigationViewItem Icon="Setting" Content="设置" Tag="SettingsPage" />
+                <NavigationViewItem Content="主页" Tag="HomePage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE80F;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="账号" Tag="AccountPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE77B;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="设置" Tag="SettingsPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE713;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
         </NavigationView>
     </Grid>
