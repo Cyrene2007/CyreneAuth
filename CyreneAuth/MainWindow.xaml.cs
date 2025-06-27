@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using CyreneAuth.Views;
+using CyreneAuth.Pages;
+using Microsoft.UI.Windowing;
 
 namespace CyreneAuth;
 
@@ -10,20 +10,13 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
-        ContentFrame.Navigate(typeof(HomePage));
-        MainNavigationView.SelectedItem = MainNavigationView.MenuItems[0];
-    }
+        Title = "Cyrene Auth";
+        ExtendsContentIntoTitleBar = true;
+        SetTitleBar(AppTitleBar);
 
-    private void MainNavigationView_SelectionChanged(NavigationView _, NavigationViewSelectionChangedEventArgs args)
-    {
-        if (args.SelectedItem is not NavigationViewItem item) return;
+        AppWindow.SetIcon("Assets/Icon.ico");
+        AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
 
-        ContentFrame.Navigate(item.Tag switch
-        {
-            "HomePage" => typeof(HomePage),
-            "AccountPage" => typeof(AccountPage),
-            "SettingsPage" => typeof(SettingsPage),
-            _ => typeof(HomePage),
-        });
+        ContentFrame.Navigate(typeof(NavigationPage));
     }
 }

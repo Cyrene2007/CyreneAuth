@@ -26,7 +26,6 @@ public partial class App : Application
 
         #endif
 
-        MainWindow.ExtendsContentIntoTitleBar = true;
         MainWindow.Activate();
     }
 

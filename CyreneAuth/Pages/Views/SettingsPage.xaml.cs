@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 
-namespace CyreneAuth.Views;
+namespace CyreneAuth.Pages.Views;
 
 public sealed partial class SettingsPage : Page
 {
