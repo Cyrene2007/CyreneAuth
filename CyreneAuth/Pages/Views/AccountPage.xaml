@@ -53,7 +53,9 @@
             </ItemsRepeater>
         </ScrollViewer>
 
-        <ContentDialog x:Name="AddAccountDialog"
+        <ContentDialog
+            Grid.Row="0"
+            x:Name="AddAccountDialog"
             Title="添加新账号"
             PrimaryButtonText="添加"
             SecondaryButtonText="取消"

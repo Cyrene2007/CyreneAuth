@@ -14,7 +14,7 @@ public sealed partial class MainWindow : Window
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
 
-        AppWindow.Resize(new Windows.Graphics.SizeInt32(1400, 800));
+        AppWindow.Resize(new Windows.Graphics.SizeInt32(1500, 850));
         AppWindow.SetIcon("Assets/Icon.png");
         AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
 

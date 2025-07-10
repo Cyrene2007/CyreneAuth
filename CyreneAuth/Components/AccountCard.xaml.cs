@@ -119,30 +119,8 @@ public sealed partial class AccountCard : UserControl
         string code = e.NewValue?.ToString() ?? "";
         var textBlock = card.FindName("TotpCodeText") as TextBlock;
         if (textBlock == null) return;
-        
-        // 如果验证码为空，显示占位符
-        if (string.IsNullOrEmpty(code))
-        {
-            textBlock.Text = "------";
-            return;
-        }
-        
-        // 根据验证码长度进行格式化
-        if (code.Length == 6)
-        {
-            // 6位验证码，每3位添加一个空格
-            textBlock.Text = $"{code.Substring(0, 3)} {code.Substring(3)}";
-        }
-        else if (code.Length == 8)
-        {
-            // 8位验证码，每4位添加一个空格
-            textBlock.Text = $"{code.Substring(0, 4)} {code.Substring(4)}";
-        }
-        else
-        {
-            // 其他长度，直接显示
-            textBlock.Text = code;
-        }
+
+        textBlock.Text = string.IsNullOrEmpty(code) ? "------" : code;
     }
 
     private static void OnRemainingSecondsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

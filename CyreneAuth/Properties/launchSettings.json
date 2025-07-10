@@ -1,10 +1,8 @@
 {
   "profiles": {
-    "CyreneAuth (Package)": {
-      "commandName": "MsixPackage"
-    },
-    "CyreneAuth (Unpackaged)": {
-      "commandName": "Project"
+    "CyreneAuth": {
+      "commandName": "Project",
+      "nativeDebugging": false
     }
   }
 }
